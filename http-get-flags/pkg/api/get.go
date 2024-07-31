@@ -46,7 +46,7 @@ func (a api) DoGetRequest(requestURL string) (Response, error) {
 	response, err := a.Client.Get(requestURL)
 
 	if err != nil {
-		return nil, fmt.Errorf("Get error: %s", err)
+		return nil, fmt.Errorf("get error: %s", err)
 	}
 
 	defer response.Body.Close()
@@ -58,12 +58,12 @@ func (a api) DoGetRequest(requestURL string) (Response, error) {
 	}
 
 	if response.StatusCode != 200 {
-		return nil, fmt.Errorf("Invalid output (HTTP Code %d): %s\n", response.StatusCode, string(body))
+		return nil, fmt.Errorf("invalid output (HTTP Code %d): %s", response.StatusCode, string(body))
 	}
 
 	if !json.Valid(body) {
 		return nil, RequestError{
-			Err:      fmt.Sprintf("Response is not a json"),
+			Err:      "response is not a json",
 			HTTPCode: response.StatusCode,
 			Body:     string(body),
 		}

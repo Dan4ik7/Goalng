@@ -21,13 +21,13 @@ func doLoginRequest(client ClientIface, requestURL, password string) (string, er
 
 	body, err := json.Marshal(loginRequest)
 	if err != nil {
-		return "", fmt.Errorf("Marshal error: %s", err)
+		return "", fmt.Errorf("marshal error: %s", err)
 	}
 
 	response, err := client.Post(requestURL, "application/json", bytes.NewBuffer(body))
 
 	if err != nil {
-		return "", fmt.Errorf("Post error: %s", err)
+		return "", fmt.Errorf("post error: %s", err)
 	}
 
 	defer response.Body.Close()
